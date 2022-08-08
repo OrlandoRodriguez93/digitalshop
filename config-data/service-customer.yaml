@@ -6,10 +6,6 @@ server:
 # http://localhost:8092/h2-console
 # Enabling H2 Console
 spring:
-  main:
-      web-application-type: none
-  application:
-    name: service-customer
   h2:
     console.enabled: true
   # ===============================
@@ -26,12 +22,9 @@ spring:
   # JPA / HIBERNATE
   # ===============================
   jpa:
-    defer-datasource-initialization: true
     show-sql: true
     hibernate:
-      ddl-auto: create
-      hbm2ddl:
-        auto: create
+      ddl-auto: update
     database-platform: org.hibernate.dialect.H2Dialect
     properties:
       hibernate:
