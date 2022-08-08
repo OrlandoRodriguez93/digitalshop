@@ -7,8 +7,7 @@ server:
 # Enabling H2 Console
 spring:
   h2:
-    console:
-      enabled: true
+    console.enabled: true
   # ===============================
   # DB
   # ===============================

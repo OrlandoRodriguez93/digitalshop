@@ -9,8 +9,10 @@ spring:
           default-label: main
           uri: https://github.com/OrlandoRodriguez93/digitalshop.git
           searchPaths: config-data
-          username: ${GIT_USER}
-          password: ${GIT_PASSWORD}
+          # username: ${GIT_USER}
+          # password: ${GIT_PASSWORD}
+          username: OrlandoRodriguez93
+          password: githubHeroes1
   security:
     user:
       name: root
