@@ -1,8 +1,13 @@
+server:
+  port: 8093
+
 spring:
   application:
-    name: shooping-service
+    name: service-shooping
+  config:
+    import: configserver:http://localhost:8081
   cloud:
     config:
       uri: http://localhost:8081
-      name: root
+      username: root
       password: s3cr3t

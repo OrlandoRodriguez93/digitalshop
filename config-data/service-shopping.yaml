@@ -1,6 +1,7 @@
+
 #Application Configuration
 server:
-  port: 8091
+  port: 8093
   error:
     include-message: always
     include-binding-errors: always
@@ -16,7 +17,7 @@ spring:
   # DB
   # ===============================
   datasource:
-    url: jdbc:h2:mem:productDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:invoiceDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;DATABASE_TO_UPPER=false
     driverClassName: org.h2.Driver
     platform: h2
     username: sa
@@ -26,6 +27,7 @@ spring:
   # JPA / HIBERNATE
   # ===============================
   jpa:
+    defer-datasource-initialization: true
     show-sql: true
     hibernate:
       ddl-auto: update
