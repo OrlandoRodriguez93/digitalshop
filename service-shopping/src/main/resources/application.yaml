@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: service-shooping
+    name: service-shopping
   config:
     import: configserver:http://localhost:8081
   cloud:
