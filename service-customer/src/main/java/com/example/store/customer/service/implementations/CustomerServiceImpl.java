@@ -10,7 +10,10 @@ import com.example.store.customer.entity.Region;
 import com.example.store.customer.repository.CustomerRepository;
 import com.example.store.customer.service.CustomerService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
