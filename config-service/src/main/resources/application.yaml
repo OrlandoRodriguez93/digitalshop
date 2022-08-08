@@ -2,18 +2,18 @@ server:
   port: 8081
 
 spring:
+  application:
+      name: config-service
   cloud:
     config:
       server:
         git:
           default-label: main
-          uri: https://github.com/OrlandoRodriguez93/digitalshop.git
+          uri: https://github.com/OrlandoRodriguez93/digitalshop
           searchPaths: config-data
-          # username: ${GIT_USER}
-          # password: ${GIT_PASSWORD}
-          username: OrlandoRodriguez93
-          password: githubHeroes1
-  security:
-    user:
-      name: root
-      password: s3cr3t
+          username: ${GIT_USER}
+          password: ${GIT_PASSWORD}
+  # security:
+  #   user:
+  #     name: root
+  #     password: s3cr3t

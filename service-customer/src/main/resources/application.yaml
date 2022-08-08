@@ -1,7 +1,13 @@
+server:
+  port: 8092
+
 spring:
+  application:
+    name: service-customer
+  config:
+    import: configserver:http://localhost:8081
   cloud:
     config:
       uri: http://localhost:8081
-      name: service-customer
-      username: root
-      password: s3cr3t
+      # username: root
+      # password: s3cr3t
