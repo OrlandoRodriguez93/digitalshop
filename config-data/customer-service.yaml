@@ -13,7 +13,6 @@ spring:
   # DB
   # ===============================
   datasource:
-    # url: jdbc:h2:tcp://localhost/~/test
     url: jdbc:h2:mem:customerDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driverClassName: org.h2.Driver
     platform: h2
