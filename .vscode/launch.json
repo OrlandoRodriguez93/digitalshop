@@ -10,6 +10,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ServiceRegistryApplication",
+            "request": "launch",
+            "mainClass": "com.example.store.registry.ServiceRegistryApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Launch ServiceRegistryApplication",
+            "request": "launch",
+            "mainClass": "com.example.store.serviceregistry.ServiceRegistryApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
