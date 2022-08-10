@@ -17,14 +17,16 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 
+import com.example.store.shopping.model.Customer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
-@Entity
 @Data
+@Entity
 @Table(name = "tbl_invoices")
 public class Invoice {
 
@@ -34,6 +36,7 @@ public class Invoice {
 
     @Column(name = "number_invoice")
     private String numberInvoice;
+
     private String description;
 
     @Column(name = "customer_id")
@@ -48,7 +51,11 @@ public class Invoice {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "invoice_id")
     private List<InvoiceItem> items;
+
     private String state;
+
+    @Transient
+    private Customer customer;
 
     public Invoice() {
         items = new ArrayList<>();

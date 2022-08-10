@@ -1,13 +1,20 @@
 package com.example.store.shopping.service.Implementations;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.store.shopping.client.CustomerClient;
+import com.example.store.shopping.client.ProductClient;
 import com.example.store.shopping.entity.Invoice;
+import com.example.store.shopping.entity.InvoiceItem;
+import com.example.store.shopping.model.Customer;
+import com.example.store.shopping.model.Product;
 import com.example.store.shopping.repository.InvoiceRepository;
 import com.example.store.shopping.service.InvoiceService;
+import com.netflix.discovery.converters.Auto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +25,12 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Autowired
     InvoiceRepository invoiceRepository;
 
+    @Autowired
+    CustomerClient customerClient;
+
+    @Auto
+    ProductClient productClient;
+
     @Override
     public List<Invoice> findAll() {
         return invoiceRepository.findAll();
@@ -25,16 +38,33 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public Invoice get(Long id) {
-        return invoiceRepository.findById(id).orElse(null);
+        Invoice invoice = invoiceRepository.findById(id).orElse(null);
+        if (null != invoice) {
+            Customer customer = customerClient.get(invoice.getCustomerId()).getBody();
+            invoice.setCustomer(customer);
+            List<InvoiceItem> listItem = invoice.getItems().stream().map(invoiceItem -> {
+                Product product = productClient.get(invoiceItem.getProductId()).getBody();
+                invoiceItem.setProduct(product);
+                return invoiceItem;
+            }).collect(Collectors.toList());
+            invoice.setItems(listItem);
+        }
+        return invoice;
     }
 
     @Override
     public Invoice create(Invoice invoice) {
         Invoice invoiceDB = invoiceRepository.findByNumberInvoice(invoice.getNumberInvoice());
-        if (invoiceDB == null)
+        if (invoiceDB != null) {
             return invoiceDB;
+        }
         invoice.setState("CREATED");
-        return invoiceRepository.save(invoice);
+        invoiceDB = invoiceRepository.save(invoice);
+        invoiceDB.getItems().forEach(invoiceItem -> {
+            productClient.updateStock(invoiceItem.getProductId(), invoiceItem.getQuantity() * -1);
+        });
+
+        return invoiceDB;
     }
 
     @Override

@@ -9,6 +9,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Positive;
 
+import com.example.store.shopping.model.Product;
+
 import lombok.Data;
 
 @Entity
@@ -19,7 +21,7 @@ public class InvoiceItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Positive(message = "El stock deebe ser mayor a cero")
+    @Positive(message = "El stock debe ser mayor que cero")
     private Double quantity;
     private Double price;
 
@@ -28,6 +30,9 @@ public class InvoiceItem {
 
     @Transient
     private Double subTotal;
+
+    @Transient
+    private Product product;
 
     public Double getSubTotal() {
         if (this.price > 0 && this.quantity > 0) {
@@ -40,6 +45,6 @@ public class InvoiceItem {
     public InvoiceItem() {
         this.quantity = (double) 0;
         this.price = (double) 0;
-    }
 
+    }
 }

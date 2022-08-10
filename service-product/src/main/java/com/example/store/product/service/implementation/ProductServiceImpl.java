@@ -5,7 +5,6 @@ import com.example.store.product.entity.Product;
 import com.example.store.product.repository.ProductRepository;
 import com.example.store.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -37,7 +36,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product update(Product product) {
         Product productDB = get(product.getId());
-        if(productDB == null) return null;
+        if (productDB == null)
+            return null;
 
         productDB.setName(product.getName());
         productDB.setDescription(product.getDescription());
@@ -49,9 +49,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product delete(Long id) {
         Product productDB = get(id);
-        if(productDB == null) return null;
+        if (productDB == null)
+            return null;
 
-        productDB.setStatus("DELETED");;
+        productDB.setStatus("DELETED");
+
         return productRepository.save(productDB);
     }
 
@@ -63,7 +65,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product updateStock(Long id, Double quantity) {
         Product productDB = get(id);
-        if (productDB == null) return null;
+        if (null == productDB) {
+            return null;
+        }
         Double stock = productDB.getStock() + quantity;
         productDB.setStock(stock);
         return productRepository.save(productDB);

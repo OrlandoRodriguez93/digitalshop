@@ -46,8 +46,6 @@ public class InvoiceRest {
         return ResponseEntity.ok(invoices);
     }
 
-    // -------------------Retrieve Single
-    // Invoice------------------------------------------
     @GetMapping(value = "/{id}")
     public ResponseEntity<Invoice> getInvoice(@PathVariable("id") long id) {
         log.info("Fetching Invoice with id {}", id);
@@ -59,8 +57,6 @@ public class InvoiceRest {
         return ResponseEntity.ok(invoice);
     }
 
-    // -------------------Create a
-    // Invoice-------------------------------------------
     @PostMapping
     public ResponseEntity<Invoice> createInvoice(@Valid @RequestBody Invoice invoice, BindingResult result) {
         log.info("Creating Invoice : {}", invoice);
