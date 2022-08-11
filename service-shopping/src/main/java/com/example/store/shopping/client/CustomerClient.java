@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.store.shopping.model.Customer;
 
-@FeignClient(name = "service-customer", fallback = CustomerHystrixFallbakcFactory.class)
+@FeignClient(value = "service-customer", fallback = CustomerHystrixFallbackFactory.class)
 public interface CustomerClient {
 
     @GetMapping(value = "/customers/{id}")

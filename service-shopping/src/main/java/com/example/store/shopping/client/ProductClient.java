@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.store.shopping.model.Product;
 
-@FeignClient(name = "product-service", path = "/api/products")
+@FeignClient(name = "service-product")
 public interface ProductClient {
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/products/{id}")
     public ResponseEntity<Product> get(@PathVariable(name = "id") Long id);
 
-    @GetMapping(value = "/{id}/stock")
-    public ResponseEntity<Product> updateStock(@PathVariable Long id, @RequestParam(required = true) Double quantity);
+    @GetMapping(value = "/products/{id}/stock")
+    public ResponseEntity<Product> updateStock(@PathVariable(name = "id") Long id,
+            @RequestParam(name = "quantity", required = true) Double quantity);
 
 }

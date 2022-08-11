@@ -14,7 +14,6 @@ import com.example.store.shopping.model.Customer;
 import com.example.store.shopping.model.Product;
 import com.example.store.shopping.repository.InvoiceRepository;
 import com.example.store.shopping.service.InvoiceService;
-import com.netflix.discovery.converters.Auto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,7 +27,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Autowired
     CustomerClient customerClient;
 
-    @Auto
+    @Autowired
     ProductClient productClient;
 
     @Override
@@ -40,6 +39,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     public Invoice get(Long id) {
         Invoice invoice = invoiceRepository.findById(id).orElse(null);
         if (null != invoice) {
+
             Customer customer = customerClient.get(invoice.getCustomerId()).getBody();
             invoice.setCustomer(customer);
             List<InvoiceItem> listItem = invoice.getItems().stream().map(invoiceItem -> {
