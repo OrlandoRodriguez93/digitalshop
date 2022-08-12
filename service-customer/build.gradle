@@ -32,7 +32,7 @@ dependencies {
 	implementation group: 'de.codecentric', name: 'spring-boot-admin-client', version: '2.7.4'
 	implementation group: 'de.codecentric', name: 'spring-boot-admin-starter-client', version: '3.0.0-M4'
 
-	// implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
 	implementation 'javax.validation:validation-api:2.0.1.Final'
 	implementation 'org.springframework.boot:spring-boot-configuration-processor'
 	implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.13.Final'
